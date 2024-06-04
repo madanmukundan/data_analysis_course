@@ -1,8 +1,8 @@
-name: <replace with a name for the conda environment>
+name: iob-py
 channels:
   - conda-forge
 dependencies:
   - python>3
   - jupyter
-  - <replace here with name of the python library for tabular data analysis>
+  - pandas
   - xlrd
