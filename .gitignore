@@ -10,9 +10,11 @@ build
 .vscode
 .ipynb_checkpoints
 .virtual_documents
+**/input_data
 
 # pycache
 **/__pycache__
 
+# compressed files
 *.tar
 
