@@ -11,10 +11,15 @@ build
 .ipynb_checkpoints
 .virtual_documents
 **/input_data
+**/fc_bk
+**/filter_cells_genes
 
 # pycache
 **/__pycache__
 
 # compressed files
 *.tar
+
+# snakemake
+.snakemake
 

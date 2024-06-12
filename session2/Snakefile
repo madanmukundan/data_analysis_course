@@ -3,24 +3,32 @@ samples = ["rd10", "wt"]
 rule results:
     input:
         # Edit the target rule to include the output of filter_genes
-        expand("filter_cells/{sample}_fc.h5ad", sample=samples),
+        # expand("data/{sample}_fc.h5ad", sample=samples),
+        expand("filter_cells_genes/{sample}_fc_fg.h5ad", sample=samples),
+
 
 rule filter_cells:
     input:
-        anndata_object = "input_data/{sample}.h5ad",
+        anndata_object = "data/{sample}.h5ad",
     output:
-        anndata_object_fc = "filter_cells/{sample}_fc.h5ad",
-        qc_violin_plot = "filter_cells/figures/{sample}_qc_violin_plot.png",
-        # Add a scatterplot to the outputs to visualize the relationship between the number of genes and transcripts
+        anndata_object_fc = "data/{sample}_fc.h5ad",
+        qc_violin_plot = "figures/{sample}_qc_violin_plot.png",
+        # NOTE: Add a scatterplot to the outputs to visualize the relationship 
+        # between the number of genes and transcripts
+        scatter_plot = "figures/{sample}_scatter_plot.png",
     params:
-        # Add a parameter that lets you determine the minimum number of genes you find acceptable
+        # NOTE: Add a parameter that lets you determine the 
+        # minimum number of genes you find acceptable
+        min_num_genes = 200,
     conda:
         "envs/filter_cells.yaml",
     shell:
         "python scripts/filter_cells.py \
                 --input_file {input.anndata_object} \
                 --output_file {output.anndata_object_fc} \
-                --qc_violin_plot {output.qc_violin_plot}"
+                --qc_violin_plot {output.qc_violin_plot} \
+                --scatter_plot {output.scatter_plot} \
+                --min_num_genes {params.min_num_genes}"
                 # Complete the shell command to include the scatterplot path you added above
                 # Complete the shell command to include the parameter you added above
                 # Pay attention to the line breaks in the shell command
@@ -29,7 +37,7 @@ rule filter_cells:
 
 rule filter_genes:
     input:
-        anndata_object_fc = "filter_cells/{sample}_fc.h5ad",
+        anndata_object_fc = "data/{sample}_fc.h5ad",
     output:
         anndata_object_fc_fg = "filter_cells_genes/{sample}_fc_fg.h5ad",
     conda:
