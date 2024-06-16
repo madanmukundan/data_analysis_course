@@ -1,0 +1,12 @@
+name: session3_theory
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - scanpy
+  - ipykernel
+  - ffmpeg
+  - scikit-image
+  - scikit-misc
+  - leidenalg
