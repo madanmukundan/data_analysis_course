@@ -13,6 +13,7 @@ build
 **/input_data
 **/fc_bk
 **/filter_cells_genes
+**/data
 
 # pycache
 **/__pycache__
@@ -22,4 +23,7 @@ build
 
 # snakemake
 .snakemake
+
+# data files
+*.h5ad
 
